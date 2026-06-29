@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered Alzheimer's Disease prediction using top 10 most important features">
+    <title>Alzheimer's Disease Prediction System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background-gradient"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" stroke="url(#gradient)" stroke-width="2" />
+                    <path d="M20 10C14.477 10 10 14.477 10 20C10 25.523 14.477 30 20 30C25.523 30 30 25.523 30 20"
+                        stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="20" cy="20" r="4" fill="url(#gradient)" />
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#667eea" />
+                            <stop offset="100%" stop-color="#764ba2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Alzheimer's Prediction System</h1>
+            </div>
+            <p class="subtitle">AI-Powered Early Detection Using Top 10 Key Indicators</p>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% Complete</div>
+        </div>
+
+        <!-- Main Form - TOP 10 FEATURES ORGANIZED BY CATEGORY -->
+        <form id="predictionForm" class="prediction-form">
+
+            <!-- Demographics Section -->
+            <section class="form-section" data-section="demographics">
+                <h2 class="section-title">
+                    <span class="section-icon">👤</span>
+                    Demographics
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="Age">Age</label>
+                        <input type="number" id="Age" name="Age" min="0" max="120" required>
+                        <span class="helper-text">Years (0-120)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clinical Measurements Section -->
+            <section class="form-section" data-section="clinical">
+                <h2 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Clinical Measurements
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="SystolicBP">Systolic BP</label>
+                        <input type="number" id="SystolicBP" name="SystolicBP" min="70" max="200" required>
+                        <span class="helper-text">mmHg (70-200)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DiastolicBP">Diastolic BP</label>
+                        <input type="number" id="DiastolicBP" name="DiastolicBP" min="40" max="130" required>
+                        <span class="helper-text">mmHg (40-130)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CholesterolHDL">HDL Cholesterol</label>
+                        <input type="number" id="CholesterolHDL" name="CholesterolHDL" step="0.1" min="20" max="100"
+                            required>
+                        <span class="helper-text">mg/dL (20-100)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lifestyle Factors Section -->
+            <section class="form-section" data-section="lifestyle">
+                <h2 class="section-title">
+                    <span class="section-icon">🏃</span>
+                    Lifestyle Factors
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="SleepQuality">Sleep Quality</label>
+                        <svg class="spinner" viewBox="0 0 50 50">
+                            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
+                        </span>
+                        </button>
+                        <button type="button" class="btn-secondary" id="resetBtn">Reset Form</button>
+                    </div>
+        </form>
+
+        <!-- Feature Descriptions Section -->
+        <div class="feature-descriptions">
+            <h2 class="descriptions-title">📋 Feature Descriptions & Value Ranges</h2>
+            <p class="descriptions-subtitle">Understanding the top 10 most important predictors for Alzheimer's disease
+            </p>
+
+            <div class="description-grid">
+                <!-- Feature 1 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#1</span>
+                        <h3>Functional Assessment</h3>
+                    </div>
+                    <p class="description-text">Measures the patient's ability to perform daily functions and maintain
+                        independence in everyday activities.</p>
+                    <div class="description-range">
+                        <strong>Range:</strong> 0-10 (0 = Poor function, 10 = Excellent function)
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#2</span>
+                        <h3>ADL (Activities of Daily Living)</h3>
+                    </div>
+                    <p class="description-text">Evaluates basic self-care activities like bathing, dressing, eating, and
+                        mobility.</p>
+                    <div class="description-range">
+                        <strong>Range:</strong> 0-10 (0 = Completely dependent, 10 = Fully independent)
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#3</span>
+                        <h3>Memory Complaints</h3>
+                    </div>
+                    <p class="description-text">Indicates whether the patient or family members have reported concerns
+                        about memory loss or forgetfulness.</p>
+                    <div class="description-range">
+                        <strong>Values:</strong> No (0) or Yes (1)
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#4</span>
+                        <h3>MMSE (Mini-Mental State Examination)</h3>
+                    </div>
+                    <p class="description-text">A widely-used cognitive screening test that assesses orientation,
+                        memory, attention, and language abilities.</p>
+                    <div class="description-range">
+                        <strong>Range:</strong> 0-30 (24-30 = Normal, 18-23 = Mild, 0-17 = Severe impairment)
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#5</span>
+                        <h3>Behavioral Problems</h3>
+                    </div>
+                    <p class="description-text">Presence of behavioral changes such as agitation, aggression, wandering,
+                        or inappropriate social behavior.</p>
+                    <div class="description-range">
+                        <strong>Values:</strong> No (0) or Yes (1)
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#6</span>
+                        <h3>Sleep Quality</h3>
+                    </div>
+                    <p class="description-text">Assessment of sleep patterns, duration, and overall sleep quality. Poor
+                        sleep is linked to cognitive decline.</p>
+                    <div class="description-range">
+                        <strong>Range:</strong> 0-10 (0 = Very poor sleep, 10 = Excellent sleep)
+                    </div>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="description-card">
+                    <div class="description-header">
+                        <span class="description-rank">#7</span>
+                        <h3>HDL Cholesterol</h3>
+                    </div>
+                    <p class="description-text">High-density lipoprotein ("good" cholesterol) level. HDL helps remove
+                        other forms of cholesterol from the bloodstream.</p>
+                    <div class="description-range">
+                        <strong>Range:</strong> 20-100 mg/dL (>60 = Optimal, 40-60 = Normal, <40=Low) </div>
+                    </div>
+
+                    <!-- Feature 8 -->
+                    <div class="description-card">
+                        <div class="description-header">
+                            <span class="description-rank">#8</span>
+                            <h3>Age</h3>
+                        </div>
+                        <p class="description-text">Patient's age in years. Age is a significant risk factor for
+                            Alzheimer's disease, with risk increasing after 65.</p>
+                        <div class="description-range">
+                            <strong>Range:</strong> 0-120 years (Risk increases significantly after age 65)
+                        </div>
+                    </div>
+
+                    <!-- Feature 9 -->
+                    <div class="description-card">
+                        <div class="description-header">
+                            <span class="description-rank">#9</span>
+                            <h3>Diastolic Blood Pressure</h3>
+                        </div>
+                        <p class="description-text">The lower number in blood pressure reading, measuring pressure in
+                            arteries between heartbeats.</p>
+                        <div class="description-range">
+                            <strong>Range:</strong> 40-130 mmHg (60-80 = Normal, 80-89 = Elevated, ≥90 = High)
+                        </div>
+                    </div>
+
+                    <!-- Feature 10 -->
+                    <div class="description-card">
+                        <div class="description-header">
+                            <span class="description-rank">#10</span>
+                            <h3>Systolic Blood Pressure</h3>
+                        </div>
+                        <p class="description-text">The upper number in blood pressure reading, measuring pressure when
+                            the heart beats.</p>
+                        <div class="description-range">
+                            <strong>Range:</strong> 70-200 mmHg (<120=Normal, 120-129=Elevated, ≥130=High) </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-container" id="resultsContainer" style="display: none;">
+                    <h2 class="results-title">Prediction Results</h2>
+
+                    <div class="results-grid">
+                        <!-- Main Result Card -->
+                        <div class="result-card main-result" id="mainResult">
+                            <div class="result-icon" id="resultIcon"></div>
+                            <h3 class="result-label" id="resultLabel">Analyzing...</h3>
+                            <div class="result-confidence">
+                                <span class="confidence-label">Confidence:</span>
+                                <span class="confidence-value" id="confidenceValue">--</span>
+                            </div>
+                            <div class="risk-badge" id="riskBadge">--</div>
+                        </div>
+
+                        <!-- Probability Chart -->
+                        <div class="result-card">
+                            <h3 class="card-title">Probability Distribution</h3>
+                            <canvas id="probabilityChart"></canvas>
+                        </div>
+
+                        <!-- Top Contributing Features -->
+                        <div class="result-card">
+                            <h3 class="card-title">Top Contributing Factors</h3>
+                            <div id="contributingFeatures" class="features-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn-primary" id="newPredictionBtn">New Prediction</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Alzheimer's Disease Prediction System | For Educational & Research Purposes Only</p>
+                <p class="disclaimer">This tool is not a substitute for professional medical advice, diagnosis, or
+                    treatment.</p>
+            </footer>
+
+            <!-- JavaScript -->
+            <script src="/static/js/app.js"></script>
+</body>
+
+</html>

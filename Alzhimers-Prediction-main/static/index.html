@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alzheimer's Disease Prediction System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="icon">🧠</span>
+                    Alzheimer's Disease Prediction System
+                </h1>
+                <p class="subtitle">Advanced ML-powered diagnostic assistance using 6 trained models</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Model Selection -->
+            <section class="card model-selection">
+                <h2 class="card-title">Select Prediction Model</h2>
+                <div class="model-grid" id="modelGrid">
+                    <div class="loading">Loading models...</div>
+                </div>
+            </section>
+
+            <!-- Feature Input Form -->
+            <section class="card feature-input">
+                <h2 class="card-title">Patient Information</h2>
+                <p class="card-description">Enter all 33 features for accurate prediction</p>
+                
+                <div class="feature-categories">
+                    <!-- Demographics -->
+                    <div class="category">
+                        <h3 class="category-title">📊 Demographics</h3>
+                        <div class="input-grid" id="demographicsInputs"></div>
+                    </div>
+
+                    <!-- Lifestyle -->
+                    <div class="category">
+                        <h3 class="category-title">🏃 Lifestyle Factors</h3>
+                        <div class="input-grid" id="lifestyleInputs"></div>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div class="category">
+                        <h3 class="category-title">🏥 Medical History</h3>
+                        <div class="input-grid" id="medicalInputs"></div>
+                    </div>
+
+                    <!-- Clinical Measurements -->
+                    <div class="category">
+                        <h3 class="category-title">🩺 Clinical Measurements</h3>
+                        <div class="input-grid" id="clinicalInputs"></div>
+                    </div>
+
+                    <!-- Cognitive Assessments -->
+                    <div class="category">
+                        <h3 class="category-title">🧩 Cognitive Assessments</h3>
+                        <div class="input-grid" id="cognitiveInputs"></div>
+                    </div>
+
+                    <!-- Symptoms -->
+                    <div class="category">
+                        <h3 class="category-title">⚠️ Symptoms</h3>
+                        <div class="input-grid" id="symptomsInputs"></div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="fillSampleData()">Load Sample Data</button>
+                    <button class="btn btn-primary" onclick="makePrediction()">
+                        <span class="btn-icon">🔍</span>
+                        Predict
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section class="card results-section" id="resultsSection" style="display: none;">
+                <h2 class="card-title">Prediction Results</h2>
+                
+                <div class="result-main" id="resultMain"></div>
+                
+                <div class="result-details">
+                    <div class="result-card" id="confidenceCard"></div>
+                    <div class="result-card" id="riskCard"></div>
+                </div>
+
+                <div class="model-comparison" id="modelComparison"></div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚕️ This is a research tool. Always consult healthcare professionals for medical diagnosis.</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
